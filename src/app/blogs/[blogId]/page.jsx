@@ -67,58 +67,62 @@ const page = async ({ params }) => {
   const blog = await params;
   const { blogId } = blog;
 
-  
-
   const matchedBlog = blogs.find((blog) => blog.id === parseInt(blogId));
   console.log(matchedBlog);
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <div className="card bg-base-100 shadow-xl">
-        <div className="card-body">
-          {/* Category + Read Time */}
-          <div className="flex flex-wrap justify-between items-center text-sm text-gray-500">
-            <span className="badge badge-primary">{matchedBlog.category}</span>
-            <span>{matchedBlog.readTime} read</span>
-          </div>
-
-          {/* Title */}
-          <h2 className="card-title text-2xl md:text-3xl font-bold mt-2">
-            {matchedBlog.title}
-          </h2>
-
-          {/* Author + Date */}
-          <p className="text-sm text-gray-400">
-            By <span className="font-medium">{matchedBlog.author}</span> •{" "}
-            {matchedBlog.date}
-          </p>
-
-          {/* Description */}
-          <p className="mt-3 text-gray-600">{matchedBlog.description}</p>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mt-3">
-            {matchedBlog.tags.map((tag, index) => (
-              <span key={index} className="badge badge-outline">
-                #{tag}
+      {matchedBlog && (
+        <div className="card bg-base-100 shadow-xl">
+          <div className="card-body">
+            {/* Category + Read Time */}
+            <div className="flex flex-wrap justify-between items-center text-sm text-gray-500">
+              <span className="badge badge-primary">
+                {matchedBlog.category}
               </span>
-            ))}
-          </div>
+              <span>{matchedBlog.readTime} read</span>
+            </div>
 
-          {/* Divider */}
-          <div className="divider"></div>
+            {/* Title */}
+            <h2 className="card-title text-2xl md:text-3xl font-bold mt-2">
+              {matchedBlog.title}
+            </h2>
 
-          {/* Content */}
-          <p className="text-base leading-relaxed text-gray-700">
-            {blog.content}
-          </p>
+            {/* Author + Date */}
+            <p className="text-sm text-gray-400">
+              By <span className="font-medium">{matchedBlog.author}</span> •{" "}
+              {matchedBlog.date}
+            </p>
 
-          {/* Action Button */}
-          <div className="card-actions justify-center mt-4">
-            <Link href={"/blogs"} className="btn btn-primary">Back</Link>
+            {/* Description */}
+            <p className="mt-3 text-gray-600">{matchedBlog.description}</p>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mt-3">
+              {matchedBlog.tags.map((tag, index) => (
+                <span key={index} className="badge badge-outline">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div className="divider"></div>
+
+            {/* Content */}
+            <p className="text-base leading-relaxed text-gray-700">
+              {blog.content}
+            </p>
+
+            {/* Action Button */}
+            <div className="card-actions justify-center mt-4">
+              <Link href={"/blogs"} className="btn btn-primary">
+                Back
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
